@@ -24,8 +24,7 @@ namespace GridMovement
         KeyboardState old;
 
         private int winCondition = 0;
-        private int player_X = 210;
-        private int player_Y = 110;
+        private Vector2 playerPosition = new Vector2(210, 110);
 
         public Game1()
         {
@@ -76,7 +75,7 @@ namespace GridMovement
                 graphics.GraphicsDevice.Clear(Color.CornflowerBlue);
 
                 spriteBatch.Begin();
-                spriteBatch.DrawString(font, "You WIN!", new Vector2(10, 10), Color.Red);
+                spriteBatch.DrawString(font, "You WIN!", new Vector2(100, 100), Color.White);
                 spriteBatch.End();
             }
             else
@@ -107,7 +106,7 @@ namespace GridMovement
         private void DrawPlayer()
         {
             spriteBatch.Begin();
-            spriteBatch.Draw(player, new Vector2(player_X, player_Y), Color.White);
+            spriteBatch.Draw(player, playerPosition, Color.White);
             spriteBatch.End();
         }
 
@@ -119,32 +118,28 @@ namespace GridMovement
             {
                 if (!old.IsKeyDown(Keys.Right))
                 {
-                    player_X = player_X + 100;
-                    player_Y = player_Y + 0;
+                    playerPosition.X += 100;
                 }
             }
             else if (direction.IsKeyDown(Keys.Left))
             {
                 if (!old.IsKeyDown(Keys.Left))
                 {
-                    player_X = player_X - 100;
-                    player_Y = player_Y - 0;
+                    playerPosition.X -= 100;
                 }
             }
             else if (direction.IsKeyDown(Keys.Up))
             {
                 if (!old.IsKeyDown(Keys.Up))
                 {
-                    player_X = player_X - 0;
-                    player_Y = player_Y  - 100;
+                    playerPosition.Y -= 100;
                 }
             }
             else if (direction.IsKeyDown(Keys.Down))
             {
                 if (!old.IsKeyDown(Keys.Down))
                 {
-                    player_X = player_X + 0;
-                    player_Y = player_Y + 100;
+                    playerPosition.Y += 100;
                 }
             }
 
@@ -152,7 +147,7 @@ namespace GridMovement
         }
         private void WinCondition()
         {
-            if (player_X == 510 && player_Y == 410)
+            if (playerPosition.X == 510 && playerPosition.Y == 410)
             {
                 winCondition = 1;
             }
